@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+
+  "name": "Wiki Lookup",
+  "description": "This extension shows the wikipedia definition for hovered hyperlink on wikipedia pages",
+  "version": "1.0",
+
+  "icons":{
+    "16": "wiki_lookup.png",
+    "48":"wiki_lookup.png",
+    "128":"wiki_lookup.png"
+  },
+
+  "browser_action": {
+    "default_icon": "wiki_lookup.png",
+    "default_popup": "popup.html"
+  },
+
+  "background":{
+    "scripts":["jquery.min.js","background.js"],
+    "persistent":false
+  },
+
+  "content_scripts": [ {
+    "matches": ["*://*.wikipedia.org/*"],//,"https://*.wikipedia.org/*"],
+    "js": [ "jquery.min.js","jquery-ui.min.js", "content.js" ],
+    "css":["jquery-ui.min.css"],
+    "run_at":"document_end"
+  }],
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "http://www.wikipedia.org/*",
+    "http://*/*",
+    "https://*/*"
+  ]
+
+}

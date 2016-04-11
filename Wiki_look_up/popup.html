@@ -1,0 +1,78 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Get the Wikipedia Definition for Wiki hyperlinks </title>
+    <style>
+      
+      #wiki_lookup .status {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        width: 400px;
+        max-height: 400px;
+      }
+
+      #wiki_lookup .parse {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        width: 400px;
+        max-height: 200px;
+      }
+
+      #wiki_lookup .body_container111 {
+        /*white-space: pre-wrap;*/
+        word-wrap: break-word;
+        width: 400px;
+        max-height: 200px;
+        font-size: medium;
+
+      }
+
+      #wiki_lookup img{
+        width: 30%;
+        height: 30%;
+      }
+
+    </style>
+
+
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="materialize/css/materialize.min.css"> -->
+
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> -->
+            
+     <script type="text/javascript" src="jquery.min.js"></script>
+    <!-- <script src="popup.js"></script> -->
+  </head>
+  <body> 
+
+      <center><h2>Wiki Lookup</h2></center>
+      <div id="wiki_lookup">
+        <div id="body_container111" class="body_container111 container">
+          <center>
+          Wiki Lookup is a utility that enables smart Wikipedia Surfing.For every hyperlink that you would like to know about, it provides with a small popup containing a comprehensive definitions from wikipedia itself.
+          <br>
+          <u>Instructions for usage</u>
+          <ul>
+            <li>Open Wiki Page</li>
+            <li>Hover over the link that you'd like to know about</li>
+            <li>Enjoy seamless wiki reading without having to open a new tab</li>
+          </ul>
+          </center>
+        </div>
+        <h4 id="status" class="status" class="truncate">
+          <center>
+            
+            Developed by: <a href="www.github.com/kushalvyas">Kushal Vyas</a>
+          </center>
+
+        </h4>
+      </div>
+  </body>
+</html>
+
