@@ -1,47 +1,38 @@
 // content.js
 $(document).ready(function(){
 
-	
-	var start_timer;
 	var port = chrome.runtime.connect({"name": "wiki_lookup_port_2016"});
-	
+
+	// write delay method for user to hover for at-least 2 sec
+	var delay = function(x, callback){
+		console.log(x);
+		var timeout = null;
+		// x.onmouseover =  function(){
+		console.log("inside onmouseover");
+		timeout = setTimeout(callback, 2000);
+		// }
+		x.onmouseout = function(){
+			console.log("inside onmouseout");
+			clearTimeout(timeout);
+		};
+	};
+
+
 	document.addEventListener('mouseover', function(event){
-		
-		var flag = false;
 		var targetnode = event.srcElement;
 		// console.log(targetnode.nodeName);
 		if (targetnode.nodeName ===  'A'){
 			console.log("inside A");
-			start_timer = window.setTimeout(function(){
-				flag = true;
-				console.log("flag : " +flag);
-				// console.log($(targetnode).attr("href"));
+			delay(targetnode, function(){
+				console.log("here inside delay");
 				var url = "www.wikipedia.org"+$(targetnode).attr("href");
-				port.postMessage({"message":"ok", "url":url});
-				// return true;
-			}, 2000);
-
+				port.postMessage({"message":"ok", "url":url});		
+			});
 		}
-		if(flag){
-			console.log("inside flag");
-			flag = false;
-			clearTimeout(start_timer);
-		}else{
-			console.log(flag);
-			console.log("here");
-		}
-		
-
 	});
 
 
-	// chrome.extension.onMessage.addListener(
-	//   function(request, sender, sendResponse) {
-	//     if (request.message === "wiki_loaded"){
-	//         console.log(request);
-	//     } 
 
-	// });
 
 	var port = chrome.runtime.connect({"name":"wiki_lookup_port_2016"});
 	port.onMessage.addListener(function(message){
