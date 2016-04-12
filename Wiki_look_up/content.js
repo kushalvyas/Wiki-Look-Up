@@ -3,15 +3,27 @@ $(document).ready(function(){
 
 	var port = chrome.runtime.connect({"name": "wiki_lookup_port_2016"});
 
+	$("<div>").attr({id:"fake_pbar"	}).appendTo('body');
+	$("<div>").attr({id:"pbar_elem"	}).appendTo('#fake_pbar');
+
 	// write delay method for user to hover for at-least 2 sec
 	var delay = function(x, callback){
 		console.log(x);
 		var timeout = null;
 		// x.onmouseover =  function(){
+		$("#pbar_elem").progressbar({value:false});
+		$("#fake_pbar").dialog({
+			height:100,
+			width:100,
+			title:$(x).attr("title")
+		});
 		console.log("inside onmouseover");
 		timeout = setTimeout(callback, 2000);
 		// }
 		x.onmouseout = function(){
+			if($("#fake_pbar").dialog("isOpen")){
+				$("#fake_pbar").dialog("close");
+			}
 			console.log("inside onmouseout");
 			clearTimeout(timeout);
 		};
@@ -66,6 +78,12 @@ $(document).ready(function(){
 		}).appendTo('body');
 
 		$("#wiki_lookup_modal").html(aa);
+
+		if($("#fake_pbar").dialog("isOpen")){
+			$("#fake_pbar").dialog("close");
+		}
+
+
 		$("#wiki_lookup_modal").dialog({
 			maxHeight:300,
 			maxWidth:300,
