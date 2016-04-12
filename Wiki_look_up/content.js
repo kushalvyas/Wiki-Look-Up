@@ -1,19 +1,36 @@
 // content.js
 $(document).ready(function(){
+
 	
+	var start_timer;
 	var port = chrome.runtime.connect({"name": "wiki_lookup_port_2016"});
 	
 	document.addEventListener('mouseover', function(event){
-
-		var start_timer;
+		
+		var flag = false;
 		var targetnode = event.srcElement;
 		// console.log(targetnode.nodeName);
 		if (targetnode.nodeName ===  'A'){
-			console.log($(targetnode).attr("href"));
-			var url = "www.wikipedia.org"+$(targetnode).attr("href");
-			port.postMessage({"message":"ok", "url":url});
-			// return true;
+			console.log("inside A");
+			start_timer = window.setTimeout(function(){
+				flag = true;
+				console.log("flag : " +flag);
+				// console.log($(targetnode).attr("href"));
+				var url = "www.wikipedia.org"+$(targetnode).attr("href");
+				port.postMessage({"message":"ok", "url":url});
+				// return true;
+			}, 2000);
+
 		}
+		if(flag){
+			console.log("inside flag");
+			flag = false;
+			clearTimeout(start_timer);
+		}else{
+			console.log(flag);
+			console.log("here");
+		}
+		
 
 	});
 
