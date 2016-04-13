@@ -7,14 +7,15 @@ $(document).ready(function(){
 	$("<div>").attr({id:"pbar_elem"	}).appendTo('#fake_pbar');
 
 	// write delay method for user to hover for at-least 2 sec
-	var delay = function(x, callback){
+	var delay = function(x, e, callback){
 		console.log(x);
 		var timeout = null;
 		// x.onmouseover =  function(){
+		// $("#fake_pbar").dialog("option", { position: [e.pageX, e.pageY] });
 		$("#pbar_elem").progressbar({value:false});
 		$("#fake_pbar").dialog({
-			height:100,
-			width:100,
+			height:80,
+			width:80,
 			title:$(x).attr("title")
 		});
 		console.log("inside onmouseover");
@@ -35,7 +36,7 @@ $(document).ready(function(){
 		// console.log(targetnode.nodeName);
 		if (targetnode.nodeName ===  'A'){
 			console.log("inside A");
-			delay(targetnode, function(){
+			delay(targetnode, event, function(){
 				console.log("here inside delay");
 				var url = "www.wikipedia.org"+$(targetnode).attr("href");
 				port.postMessage({"message":"ok", "url":url});		
